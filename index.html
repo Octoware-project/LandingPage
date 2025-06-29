@@ -1,1 +1,63 @@
-htmk 5
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <title>Cooperativa Esi</title>
+</head>
+<body>
+    <h1>COOPERATIVA ESI</h1>
+    <button type="button">Iniciar sesión</button>
+    
+    <div class="cajaDeImagenes">
+        <h2>Sobre nosotros</h2>
+        <input type="checkbox" id="mostrarVision">
+        <input type="checkbox" id="mostrarMision">
+        <input type="checkbox" id="mostrarObjetivos">
+
+        <label for="mostrarVision">Visión</label>
+        <label for="mostrarMision">Misión</label>
+        <label for="mostrarObjetivos">Objetivos</label>
+
+        <img src="" alt="vision" class="imagen">   
+        <img src="" alt="mision" class="imagen"> 
+        <img src="" alt="objetivos" class="imagen"> 
+    </div>
+
+    <div class="carrusel">
+        <h2>Sobre nosotros</h2>
+        <div class="diapositiva Destacados"></div>
+        <div class="texto">Estos son algunos de nuestros miembros destacados</div>
+
+        <div class="diapositiva Joven"></div>
+        <div class="texto">"Está es la mejor cooperativa del mundo, siempre están ayudando"</div>
+
+        <div class="diapositiva Adulto"></div>
+        <div class="texto">"Menuda porqueria"</div>
+
+        <div class="diapositiva fotoRepresentativa"></div>
+        <div class="texto">Te esperamos, te aseguramos pasarla bien</div>
+    </div>
+
+    <div class="formulario">
+        Nombre completo: <input type="text" required> <br>
+        C.I: <input type="number" required> <br>
+        Celular: <input type="number" required> <br>
+        Fecha de nacimiento: <input type="date" required> <br>
+        Correo: <input type="email" required> <br>
+        Nacionalidad: <input type="text" required> <br>
+        Estado civil:
+            <select name="estado">
+                <option value="soltero">Soltero</option>
+                <option value="casado">Casado</option>
+                <option value="divorciado">Divorciado</option>
+                <option value="viudo">Viudo</option>
+            </select>
+        Ingreso total del núcleo familiar: <input type="number" required> <br>
+        Agregar núcleo familiar (nombres, fecha de nacimiento y sexo), en caso de no tener poner "solo"
+        <input type="text" required> 
+        <button type="button">Enviar</button>
+    </div>
+</body>
+</html>
