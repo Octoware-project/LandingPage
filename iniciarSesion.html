@@ -1,43 +1,74 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>inicioDeSesion</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Inicio de Sesión</title>
+  <style>
+    input[type="radio"] {
+      display: none;
+    }
+
+    label {
+      display: block;
+      width: 300px;
+      margin: 10px auto;
+      background-color: #4CAF50;
+      color: white;
+      padding: 12px;
+      text-align: center;
+      cursor: pointer;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    .formulario {
+      display: none;
+      max-width: 300px;
+      margin: 0 auto 20px auto;
+      padding: 15px;
+      border: 1px solid #ccc;
+      background-color: #f0f0f0;
+      border-radius: 5px;
+    }
+
+    /* Mostrar según radio seleccionado */
+    #administrador:checked ~ .admin-form {
+      display: block;
+    }
+
+    #residente:checked ~ .residente-form {
+      display: block;
+    }
+  </style>
 </head>
 <body>
-    <h1>Iniciar Sesión</h1>
-    <div class="administradores">
-        <input type="checkbox" id="palanca">
-        <label for="palanca">Administradores</label>
-        <div class="desplegable">
-            <form>
-                Usuario: <input type="text" required> <br>
-                Contraseña: <input type="password" required> <br>
-                <a href="Backoffice.html">
-                    <button type="button">Iniciar</button>
-                </a>
-                <a href="olvidar contraseña">Se me olvido la contraseña</a>
-            </form>
-        </div>
-    </div>
-    <div class="residentes">
-        <input type="checkbox" id="palanca">
-        <label for="palanca">Residentes</label>
-        <div class="desplegable">
-            <form>
-                Usuario: <input type="text" required> <br>
-                Contraseña: <input type="password" required> <br>
-                <!--
-                <h2>Iniciar sesión por correo Electrónico, Google o Facebook:</h2>
-                -->
-                <a href="Frontend.html">
-                    <button type="button">Iniciar</button>
-                </a>
-                <a href="olvidar contraseña">Se me olvido la contraseña</a>
-            </form>
-        </div>
-    </div>
+  <h1 style="text-align:center;">Iniciar Sesión</h1>
+
+  <input type="radio" name="login" id="administrador" />
+  <input type="radio" name="login" id="residente" />
+
+  <label for="administrador">Administradores</label>
+  <label for="residente">Residentes</label>
+
+  <div class="formulario admin-form">
+    <form>
+      Usuario: <input type="text" required /><br /><br />
+      Contraseña: <input type="password" required /><br /><br />
+      <button type="submit">Iniciar</button><br /><br />
+      <a href="#">Se me olvidó la contraseña</a>
+      <p>holaaaa</p>
+    </form>
+  </div>
+
+  <div class="formulario residente-form">
+    <form>
+      Usuario: <input type="text" required /><br /><br />
+      Contraseña: <input type="password" required /><br /><br />
+      <button type="submit">Iniciar</button><br /><br />
+      <a href="#">Se me olvidó la contraseña</a>
+      <p>toto bien?</p>
+    </form>
+  </div>
 </body>
 </html>
