@@ -7,24 +7,30 @@
     <title>Cooperativa Esi</title>
 </head>
 <body>
+    <div class="nombreCooperativa">
     <h1>COOPERATIVA ESI</h1>
-    <button type="button">Iniciar sesión</button>
+    <a href="iniciarSesion.html">
+        <button>Iniciar sesiòn</button>
+    </a>
+    </div>
     
     <div class="cajaDeImagenes">
-        <h2>Sobre nosotros</h2>
-        <input type="checkbox" id="mostrarVision">
-        <input type="checkbox" id="mostrarMision">
-        <input type="checkbox" id="mostrarObjetivos">
-
-        <label for="mostrarVision">Visión</label>
-        <label for="mostrarMision">Misión</label>
-        <label for="mostrarObjetivos">Objetivos</label>
-
-        <img src="" alt="vision" class="imagen">   
-        <img src="" alt="mision" class="imagen"> 
-        <img src="" alt="objetivos" class="imagen"> 
+    <h2>Sobre nosotros</h2>
+        <div class="contenedor-caja">
+            <div class="menu-botones">
+            <button onclick="mostrarImagen('vision')">Visión</button>
+            <button onclick="mostrarImagen('mision')">Misión</button>
+            <button onclick="mostrarImagen('objetivos')">Objetivos</button>
+            </div>
+            <div class="imagen-contenido">
+            <img src="image.png" alt="Visión" id="img-vision" class="imagen">
+            <img src="mision.png" alt="Misión" id="img-mision" class="imagen">
+            <img src="objetivos.png" alt="Objetivos" id="img-objetivos" class="imagen">
+            </div>
+        </div>
     </div>
 
+    <!--
     <div class="carrusel">
         <h2>Sobre nosotros</h2>
         <div class="diapositiva Destacados"></div>
@@ -39,8 +45,11 @@
         <div class="diapositiva fotoRepresentativa"></div>
         <div class="texto">Te esperamos, te aseguramos pasarla bien</div>
     </div>
+    -->
 
     <div class="formulario">
+        <h2>Si deseas unirte completa este formulario</h2>
+        <form id="formulario">
         Nombre completo: <input type="text" required> <br>
         C.I: <input type="number" required> <br>
         Celular: <input type="number" required> <br>
@@ -58,6 +67,9 @@
         Agregar núcleo familiar (nombres, fecha de nacimiento y sexo), en caso de no tener poner "solo"
         <input type="text" required> 
         <button type="button">Enviar</button>
+        </form>
     </div>
+
+    <script src="script.js"></script>
 </body>
 </html>
