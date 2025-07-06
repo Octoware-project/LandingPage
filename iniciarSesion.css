@@ -1,0 +1,31 @@
+input[type="radio"] {
+    display: none;
+}
+
+label {
+    display: block;
+    width: 300px;
+    margin: 10px auto;
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    text-align: center;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.formulario {
+    display: none;
+    max-width: 300px;
+    margin: 0 auto 20px auto;
+    padding: 15px;
+    border: 1px solid #ccc;
+    background-color: #f0f0f0;
+    border-radius: 5px;
+}
+
+/* Mostrar según radio seleccionado */
+#administrador:checked ~ .admin-form {
+    display: block;
+}

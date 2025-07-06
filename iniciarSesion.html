@@ -3,72 +3,24 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="iniciarSesion.css">
   <title>Inicio de Sesión</title>
-  <style>
-    input[type="radio"] {
-      display: none;
-    }
-
-    label {
-      display: block;
-      width: 300px;
-      margin: 10px auto;
-      background-color: #4CAF50;
-      color: white;
-      padding: 12px;
-      text-align: center;
-      cursor: pointer;
-      border-radius: 5px;
-      font-size: 16px;
-    }
-
-    .formulario {
-      display: none;
-      max-width: 300px;
-      margin: 0 auto 20px auto;
-      padding: 15px;
-      border: 1px solid #ccc;
-      background-color: #f0f0f0;
-      border-radius: 5px;
-    }
-
-    /* Mostrar según radio seleccionado */
-    #administrador:checked ~ .admin-form {
-      display: block;
-    }
-
-    #residente:checked ~ .residente-form {
-      display: block;
-    }
-  </style>
 </head>
 <body>
   <h1 style="text-align:center;">Iniciar Sesión</h1>
 
   <input type="radio" name="login" id="administrador" />
-  <input type="radio" name="login" id="residente" />
-
-  <label for="administrador">Administradores</label>
-  <label for="residente">Residentes</label>
+  <label for="administrador">Usuarios</label>
 
   <div class="formulario admin-form">
-    <form>
-      Usuario: <input type="text" required /><br /><br />
-      Contraseña: <input type="password" required /><br /><br />
-      <button type="submit">Iniciar</button><br /><br />
-      <a href="#">Se me olvidó la contraseña</a>
-      <p>holaaaa</p>
-    </form>
-  </div>
+    <form id="formulario">
+      Usuario: <input type="text" id="usuario" required /><br /><br />
+      Contraseña: <input type="password" id="clave" required /><br /><br />
 
-  <div class="formulario residente-form">
-    <form>
-      Usuario: <input type="text" required /><br /><br />
-      Contraseña: <input type="password" required /><br /><br />
       <button type="submit">Iniciar</button><br /><br />
-      <a href="#">Se me olvidó la contraseña</a>
-      <p>toto bien?</p>
     </form>
   </div>
+  
+  <script src="iniciarSesion.js"></script>
 </body>
 </html>
