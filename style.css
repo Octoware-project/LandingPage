@@ -5,6 +5,16 @@
   font-family: 'Kaisei Opti', serif;
 }
 
+.nombreCooperativa {
+  background-image: url("FondoIndex.png");
+  margin: 0;
+  padding: 0;
+  height: 100vh;
+  background-size: cover;         
+  background-position: center;    
+  background-repeat: no-repeat;      
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -32,7 +42,7 @@ body > * {
   box-sizing: border-box;
 
   overflow-y: auto; 
-  background: white;
+  background-image: url(fondoTrabajador.png);
   border-bottom: 3px solid #ccc;
 }
 
@@ -58,6 +68,8 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-image: url(fondoTrabajador.png);
+  
 }
 
 .contenedor-caja {
@@ -68,6 +80,7 @@ button {
   justify-content: center;
   align-items: center; /* centra verticalmente todo el contenido */
   gap: 40px;
+  
 }
 
 .menu-botones {
@@ -164,7 +177,7 @@ h2 {
   width: 95%;
   max-height: calc(100vh - 110px);
   overflow-y: auto;        
-  background-color: #fff;
+  background-image: url(fondoTrabajador.png);
   padding: 20px 30px;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
