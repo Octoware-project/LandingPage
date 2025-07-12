@@ -16,7 +16,7 @@ formulario.addEventListener('submit', function(evento) {
     datos[clave] = valor;
     });
 
-    fetch('https://tu-url-aqui.com/api', {
+    fetch('https://github.com/Octoware-project/Backoffice-Adminstraci-n/tree/a317d9b4b83a0581d05aa25e439f526044ba3627/app/Http/Controllers', {
     method: 'POST',
     headers: {'Content-Type': 'application/json'},
     body: JSON.stringify(datos)

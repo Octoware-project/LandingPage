@@ -42,7 +42,6 @@ body > * {
   box-sizing: border-box;
 
   overflow-y: auto; 
-  background-image: url(fondoTrabajador.png);
   border-bottom: 3px solid #ccc;
 }
 
@@ -68,7 +67,7 @@ button {
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-image: url(fondoTrabajador.png);
+  background-image: url("fondoTrabajador.png");
   
 }
 
@@ -177,15 +176,24 @@ h2 {
   width: 95%;
   max-height: calc(100vh - 110px);
   overflow-y: auto;        
-  background-image: url(fondoTrabajador.png);
   padding: 20px 30px;
   border-radius: 12px;
   box-shadow: 0 0 15px rgba(0,0,0,0.1);
   color: #2F227B;
   margin: 0 auto;
   display: flex;
+  background-color: white;
   flex-direction: column;
   justify-content: flex-start;
+}
+
+.fondoFormulario {
+  width: 100%;
+  height: 100vh;
+  background-image: url("fondoTrabajador.png"); /* cambiá por el fondo que quieras */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
 }
 
 .formulario h2 {

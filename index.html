@@ -9,7 +9,7 @@
 <body>
     <div class="nombreCooperativa">
     <h1>COOPERATIVA ESI</h1>
-    <a href="iniciarSesion.html">
+    <a href="/FULL STAC/PROYECT/iniciarSesion/index.html">
         <button>Iniciar sesiòn</button>
     </a>
     </div>
@@ -24,8 +24,8 @@
             </div>
             <div class="imagen-contenido">
             <img src="image.png" alt="Visión" id="img-vision" class="imagen">
-            <img src="mision.png" alt="Misión" id="img-mision" class="imagen">
-            <img src="objetivos.png" alt="Objetivos" id="img-objetivos" class="imagen">
+            <img src="image.png" alt="Misión" id="img-mision" class="imagen">
+            <img src="image.png" alt="Objetivos" id="img-objetivos" class="imagen">
             </div>
         </div>
     </div>
@@ -47,29 +47,32 @@
     </div>
     -->
 
-    <div class="formulario">
-        <h2>Si deseas unirte completa este formulario</h2>
-        <form id="formulario">
-        Nombre completo: <input type="text" required> <br>
-        C.I: <input type="number" required> <br>
-        Celular: <input type="number" required> <br>
-        Fecha de nacimiento: <input type="date" required> <br>
-        Correo: <input type="email" required> <br>
-        Nacionalidad: <input type="text" required> <br>
-        Estado civil:
-            <select name="estado">
-                <option value="soltero">Soltero</option>
-                <option value="casado">Casado</option>
-                <option value="divorciado">Divorciado</option>
-                <option value="viudo">Viudo</option>
-            </select>
-        Ingreso total del núcleo familiar: <input type="number" required> <br>
-        Agregar núcleo familiar (nombres, fecha de nacimiento y sexo), en caso de no tener poner "solo"
-        <input type="text" required> 
-        <button type="button">Enviar</button>
-        </form>
+    <div class="fondoFormulario">
+        <div class="formulario">
+            <h2>Si deseas unirte completa este formulario</h2>
+            <form id="formulario">
+                Nombre completo: <input type="text" name="nombre" required> <br>
+                C.I: <input type="number" name="cedula" required> <br>
+                Celular: <input type="number" name="celular" required> <br>
+                Fecha de nacimiento: <input type="date" name="fechaNacimiento" required> <br>
+                Correo: <input type="email" name="correo" required> <br>
+                Nacionalidad: <input type="text" name="nacionalidad" required> <br>
+                Estado civil:
+                <select name="estado">
+                    <option value="soltero">Soltero</option>
+                    <option value="casado">Casado</option>
+                    <option value="divorciado">Divorciado</option>
+                    <option value="viudo">Viudo</option>
+                </select>
+                Ingreso total del núcleo familiar: <input type="number" name="Ingreso_Total" required> <br>
+                Agregar núcleo familiar (nombres, fecha de nacimiento y sexo), en caso de no tener poner "solo"
+                <input type="text" name="nucleo" required> 
+                <button type="submit">Enviar</button>
+            </form>
+        </div>
     </div>
-
+    
+    <script src="conexion.js"></script>
     <script src="script.js"></script>
 </body>
 </html>
