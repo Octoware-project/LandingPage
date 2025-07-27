@@ -7,10 +7,11 @@
     <title>Cooperativa Esi</title>
 </head>
 <body>
+    
     <div class="nombreCooperativa">
     <h1>COOPERATIVA ESI</h1>
-    <a href="/FULL STAC/PROYECT/iniciarSesion/index.html">
-        <button>Iniciar sesiòn</button>
+    <a href="/CooperativaESI/Aplicacion/FrontEnd_Login/index.php">
+        <button>Iniciar sesión</button>
     </a>
     </div>
     
@@ -23,56 +24,75 @@
             <button onclick="mostrarImagen('objetivos')">Objetivos</button>
             </div>
             <div class="imagen-contenido">
-            <img src="image.png" alt="Visión" id="img-vision" class="imagen">
-            <img src="image.png" alt="Misión" id="img-mision" class="imagen">
-            <img src="image.png" alt="Objetivos" id="img-objetivos" class="imagen">
+            <img src="img/image.png" alt="Visión" id="img-vision" class="imagen">
+            <img src="img/image.png" alt="Misión" id="img-mision" class="imagen">
+            <img src="img/image.png" alt="Objetivos" id="img-objetivos" class="imagen">
             </div>
         </div>
     </div>
 
-    <!--
-    <div class="carrusel">
-        <h2>Sobre nosotros</h2>
-        <div class="diapositiva Destacados"></div>
-        <div class="texto">Estos son algunos de nuestros miembros destacados</div>
-
-        <div class="diapositiva Joven"></div>
-        <div class="texto">"Está es la mejor cooperativa del mundo, siempre están ayudando"</div>
-
-        <div class="diapositiva Adulto"></div>
-        <div class="texto">"Menuda porqueria"</div>
-
-        <div class="diapositiva fotoRepresentativa"></div>
-        <div class="texto">Te esperamos, te aseguramos pasarla bien</div>
-    </div>
-    -->
 
     <div class="fondoFormulario">
         <div class="formulario">
             <h2>Si deseas unirte completa este formulario</h2>
-            <form id="formulario">
-                Nombre completo: <input type="text" name="nombre" required> <br>
-                C.I: <input type="number" name="cedula" required> <br>
-                Celular: <input type="number" name="celular" required> <br>
-                Fecha de nacimiento: <input type="date" name="fechaNacimiento" required> <br>
-                Correo: <input type="email" name="correo" required> <br>
-                Nacionalidad: <input type="text" name="nacionalidad" required> <br>
-                Estado civil:
-                <select name="estado">
-                    <option value="soltero">Soltero</option>
-                    <option value="casado">Casado</option>
-                    <option value="divorciado">Divorciado</option>
-                    <option value="viudo">Viudo</option>
-                </select>
-                Ingreso total del núcleo familiar: <input type="number" name="Ingreso_Total" required> <br>
-                Agregar núcleo familiar (nombres, fecha de nacimiento y sexo), en caso de no tener poner "solo"
-                <input type="text" name="nucleo" required> 
-                <button type="submit">Enviar</button>
-            </form>
+            
+                <form id="registroForm">
+                    Nombre: <input type="text" name="nombre" value="Josefina" required> <br>
+                    Apellido: <input type="text" name="apellido" value="Perez" required> <br>
+                    Email: <input type="email" name="mail" value="JPerez@test.com" required> <br>
+                    Password: <input type="password" name="password" value="12345678" required> <br>
+                    C.I: <input type="number" name="CI" value="11122233" required> <br>
+                    Teléfono: <input type="tel" name="telefono" value="099123123" required> <br>
+                    Dirección: <input type="text" name="direccion" value="Rivera 1232" required> <br>
+
+                    <input type="hidden" name="Tipo_Persona" value="Usuario">
+                    <input type="hidden" name="Estado_Registro" value="Pendiente">
+
+                    <button type="submit">Enviar</button>
+                </form>
+                <script>
+        document.getElementById("registroForm").addEventListener("submit", function(event) {
+        event.preventDefault();
+
+        const form = event.target;
+        const data = {
+            nombre: form.nombre.value,
+            apellido: form.apellido.value,
+            email: form.mail.value,
+            password: form.password.value,
+            CI: parseInt(form.CI.value),
+            Telefono: form.telefono.value,
+            Direccion: form.direccion.value,
+            Estado_Registro: form.Estado_Registro.value,
+            Tipo_Persona: form.Tipo_Persona.value
+        };
+
+        fetch("http://localhost/CooperativaESI/API_Usuarios/public/api/registrar", {
+            method: "POST",
+            headers: {
+            "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+        })
+        .then(response => {
+            if (!response.ok) {
+            throw new Error("Error en la solicitud: " + response.status);
+            }
+            return response.json();
+        })
+        .then(json => {
+            alert("Registro exitoso!");
+            console.log(json);
+        })
+        .catch(error => {
+            alert("Error al registrar: " + error.message);
+            console.error(error);
+        });
+        });
+  </script>
+        
         </div>
     </div>
-    
-    <script src="conexion.js"></script>
-    <script src="script.js"></script>
+        
 </body>
 </html>
