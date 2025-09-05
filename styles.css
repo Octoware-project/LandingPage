@@ -1,4 +1,4 @@
-    :root{
+:root{
       --pink: #de5f88;
       --bg-soft: linear-gradient(135deg,#ffc1e3 0%,#a3d8f4 100%);
       --card-bg: #fff;
@@ -46,8 +46,13 @@
 
     /* MAIN (dentro de la caja principal) */
     main{
-      max-width:980px;margin:18px auto 40px;background:var(--card-bg);padding:18px;border-radius:16px;
-      box-shadow:0 18px 36px rgba(255,193,227,0.25); text-align:center;
+      max-width:900px; /* vuelve al tamaño anterior */
+      margin: 18px auto 40px;
+      background: var(--card-bg);
+      padding: 18px;
+      border-radius: 16px;
+      box-shadow: 0 18px 36px rgba(255,193,227,0.25);
+      text-align: center;
       animation: fadeInUp .45s ease both;
     }
     main .lead{ color:var(--muted); margin-bottom:8px }
@@ -61,12 +66,26 @@
 
     /* left buttons column */
     .side{
-      width:160px; display:flex; flex-direction:column; gap:12px;
+      width: 180px; /* antes 240px, ahora menos ancho */
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      align-items: stretch;
+      height: 340px;
+      min-height: 320px;
     }
     .side-btn{
       background: #f4f6fb; border:1px solid rgba(0,0,0,0.06); padding:12px 10px; border-radius:8px;
       font-weight:700; color:#2a3b57; cursor:pointer; text-align:center;
       box-shadow: 0 4px 10px rgba(46,74,161,0.03); transition: transform .12s ease, box-shadow .12s ease;
+      flex: 1 1 0;
+      width: 100%;
+      min-width: 0;
+      /* Para que el texto esté centrado verticalmente */
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.25rem; /* aumenta el tamaño de fuente */
     }
     .side-btn:hover{ transform: translateY(-4px); box-shadow: 0 14px 30px rgba(46,74,161,0.06); }
     .side-btn.active{
@@ -119,10 +138,28 @@
     /* Responsive */
     @media (max-width:900px){
       .about-card{ flex-direction:column; }
-      .side{ width:100%; flex-direction:row; overflow:auto; gap:10px; padding-bottom:6px; }
-      .side-btn{ min-width:120px; flex:0 0 auto; }
+      .side{
+        width:100%;
+        flex-direction:row;
+        overflow:auto;
+        gap:10px;
+        padding-bottom:6px;
+        align-items: stretch;
+        height: auto;
+        min-height: 0;
+      }
+      .side-btn{
+        min-width:0;
+        flex:1 1 0;
+        width:100%;
+        font-size: 1.12rem; /* también un poco más grande en mobile */
+        padding: 16px 6px;
+      }
       .panel::before{ display:none; }
       .intro-container{ margin-top:12px; padding:16px }
+      .clean-about-card {
+        max-width: 98vw;
+      }
     }
 	    /* MODAL BACKDROP */
     .modal-bg{ display:none; position:fixed; inset:0; background:rgba(0,0,0,0.45); backdrop-filter: blur(3px); align-items:center; justify-content:center; padding:12px; z-index:2000 }
@@ -166,4 +203,71 @@
 	nav {
   transition: transform 0.35s cubic-bezier(.2,.9,.3,1), 
               opacity 0.35s ease;
+}
+
+.clean-about-card .panel.clean-panel::before {
+  display: none !important;
+}
+.clean-panel {
+  position: relative;
+  background: var(--panel-bg);
+  border: 4px solid rgba(222,95,136,0.10);
+  box-shadow: 0 8px 30px rgba(0,0,0,0.04);
+  min-height: 320px;
+}
+.clean-panel h2 {
+  color: var(--pink);
+  font-size: 1.5rem;
+  font-weight: 800;
+  margin-bottom: 10px;
+  text-align: center;
+}
+.clean-panel p {
+  color: var(--muted);
+  line-height: 1.7;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 18px;
+  white-space: pre-line;
+}
+.clean-panel img {
+  display: block;
+  max-width: 220px;
+  margin: 18px auto 0;
+  border-radius: 12px;
+  box-shadow: 0 4px 18px rgba(222,95,136,0.13);
+}
+.side-btn.active {
+  background: var(--pink);
+  color: #fff;
+  box-shadow: 0 8px 24px rgba(222,95,136,0.18);
+  transform: none;
+}
+.clean-about-card {
+  display: flex;
+  gap: 20px;
+  align-items: flex-start;
+  padding: 18px;
+  margin-top: 14px;
+  border-radius: 12px;
+  background: none !important;
+  box-shadow: none !important;
+  max-width: 900px; /* vuelve al tamaño anterior */
+  margin-left: auto;
+  margin-right: auto;
+}
+nav.side {
+  background: none !important;
+  box-shadow: none !important;
+  border: none !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  width: 180px; /* antes 240px, ahora menos ancho */
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+textarea[placeholder="Tu mensaje"] {
+  resize: none;
 }

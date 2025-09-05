@@ -1,35 +1,64 @@
-    const contents = {
-      mision: { title: "Misión", body: "Desarrollar un sistema de información accesible, eficiente y seguro que facilite la gestión integral de una cooperativa de viviendas de ayuda mutua..." },
-      vision: { title: "Visión", body: "Ser una solución tecnológica de referencia para cooperativas de vivienda, contribuyendo al desarrollo social mediante herramientas digitales..." },
-      valores: { title: "Valores", body: "Nuestros valores se fundamentan en la solidaridad, promoviendo la ayuda mutua como base del modelo cooperativo; la transparencia..." },
-      proyecto: { title: "Proyecto", body: "Aquí puedes describir el proyecto: objetivos, alcance, plazos y actores involucrados." },
-      avances: { title: "Avances", body: "Listado de hitos y avances: versiones realizadas, tareas completadas y próximos pasos." },
-      unidos: { title: "Unidos", body: "Espacio para mensajes de unidad, testimonios, o llamados a la acción comunitaria." }
+const contents = {
+      mision: {
+        title: "Misión",
+        body: "Nuestra misión es impulsar el desarrollo social y comunitario a través de la cooperación y la solidaridad.",
+        img: "img/mision.jpg"
+      },
+      vision: {
+        title: "Visión",
+        body: "Ser una cooperativa referente en innovación social, inclusión y participación activa de sus miembros.",
+        img: "img/vision.jpg"
+      },
+      objetivos: {
+        title: "Objetivos",
+        body: "1. Fomentar la participación de los socios.\n2. Desarrollar proyectos sostenibles.\n3. Promover la educación cooperativa.",
+        img: "img/objetivos.jpg"
+      }
     };
 
     document.addEventListener('DOMContentLoaded', () => {
-      const buttons = Array.from(document.querySelectorAll('.side-btn'));
-      const panel = document.getElementById('panel');
+      // --- NUEVO BLOQUE PARA LA SECCIÓN PRINCIPAL ---
+  const buttons = Array.from(document.querySelectorAll('.side-btn'));
+  const panel = document.getElementById('panel');
 
-      function setActive(btn){
-        buttons.forEach(b=>{ b.classList.toggle('active', b===btn); b.setAttribute('aria-selected', b===btn?'true':'false'); });
-      }
+  function setActive(btn) {
+    buttons.forEach(b => {
+      b.classList.toggle('active', b === btn);
+      b.setAttribute('aria-selected', b === btn ? 'true' : 'false');
+    });
+  }
 
-      function render(key){
-        const data = contents[key]; if(!data) return;
-        panel.innerHTML = '';
-        const wrap = document.createElement('div'); wrap.className='fade';
-        const title = document.createElement('h2'); title.textContent=data.title;
-        const p = document.createElement('p'); p.textContent=data.body;
-        wrap.appendChild(title); wrap.appendChild(p); panel.appendChild(wrap); panel.focus();
-      }
+  function render(key) {
+    const data = contents[key];
+    if (!data) return;
+    panel.innerHTML = '';
+    const wrap = document.createElement('div');
+    wrap.className = 'fade';
+    const title = document.createElement('h2');
+    title.textContent = data.title;
+    const p = document.createElement('p');
+    p.textContent = data.body;
+    const img = document.createElement('img');
+    img.src = data.img;
+    img.alt = data.title;
+    wrap.appendChild(title);
+    wrap.appendChild(p);
+    wrap.appendChild(img);
+    panel.appendChild(wrap);
+    panel.focus();
+  }
 
-      buttons.forEach(btn=>{
-        btn.addEventListener('click', ()=>{ setActive(btn); render(btn.dataset.key); });
-      });
+  buttons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      setActive(btn);
+      render(btn.dataset.key);
+    });
+  });
 
-      // inicial
-      const first = buttons[0]; setActive(first); render(first.dataset.key);
+  // inicial
+  const first = buttons[0];
+  setActive(first);
+  render(first.dataset.key);
 
       // Modal
       const modalBg = document.getElementById('modalBg');
@@ -84,18 +113,17 @@
 
       form.addEventListener('submit', async (ev) => {
         ev.preventDefault();
+        // alert('DEBUG');
+        // console.log('DEBUG: Se presionó Enviar Registro');
         if(!form.checkValidity()){ form.reportValidity(); return; }
 
         const payload = {
-          nombre: form.nombre.value.trim(),
+          name: form.nombre.value.trim(),
           apellido: form.apellido.value.trim(),
+          CI: form.CI.value.trim(),
           email: form.email.value.trim(),
           password: form.password.value,
-          CI: String(form.CI.value).trim(),
-          Telefono: form.Telefono.value.trim(),
-          Direccion: form.Direccion.value.trim(),
-          Estado_Registro: "Pendiente",
-          Tipo_Persona: "Residente"
+          estadoRegistro: "Pendiente"
         };
 
         try{
@@ -124,4 +152,53 @@
           submitBtn.textContent = 'Enviar Registro';
         }
       });
+
+
+  const btnNavNosotros = document.getElementById('btnNavNosotros');
+  const seccionSobreNosotros = document.getElementById('sobreNosotros');
+  const mainNosotros = document.getElementById('nosotros');
+  const introContainer = document.getElementById('inicio');
+  const btnNavContacto = document.getElementById('btnNavContacto');
+  const seccionContacto = document.getElementById('seccionContacto');
+
+  function scrollToSection(section) {
+    if (!section) return;
+    const nav = document.getElementById('siteNav');
+    const navHeight = nav ? nav.offsetHeight : 70;
+    const rect = section.getBoundingClientRect();
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+    const top = rect.top + scrollTop - navHeight - 12; // 12px extra margen opcional
+    window.scrollTo({ top, behavior: 'smooth' });
+  }
+
+  btnNavNosotros.addEventListener('click', (e) => {
+    e.preventDefault();
+    if (mainNosotros) mainNosotros.style.display = 'none';
+    if (introContainer) introContainer.style.display = 'none';
+    if (seccionSobreNosotros) seccionSobreNosotros.style.display = '';
+    if (seccionContacto) seccionContacto.style.display = 'none';
+    scrollToSection(seccionSobreNosotros);
+  });
+
+  if (btnNavContacto) {
+    btnNavContacto.addEventListener('click', (e) => {
+      e.preventDefault();
+      if (mainNosotros) mainNosotros.style.display = 'none';
+      if (introContainer) introContainer.style.display = 'none';
+      if (seccionSobreNosotros) seccionSobreNosotros.style.display = 'none';
+      if (seccionContacto) seccionContacto.style.display = '';
+      scrollToSection(seccionContacto);
+    });
+  }
+
+  const btnNavInicio = document.querySelector('a[href="#inicio"]');
+  if (btnNavInicio) {
+    btnNavInicio.addEventListener('click', (e) => {
+      if (mainNosotros) mainNosotros.style.display = '';
+      if (introContainer) introContainer.style.display = '';
+      if (seccionSobreNosotros) seccionSobreNosotros.style.display = 'none';
+      if (seccionContacto) seccionContacto.style.display = 'none';
+      scrollToSection(introContainer); // asegura scroll compensado
+    });
+  }
     })();
