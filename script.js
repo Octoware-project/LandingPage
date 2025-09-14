@@ -85,73 +85,89 @@ const contents = {
       });
     });
     /* Modal y formulario */
-    (function(){
-      const openBtn = document.getElementById('btnOpenForm');
-      const modalBg = document.getElementById('modalBg');
-      const closeBtn = document.getElementById('btnCloseModal');
-      const form = document.getElementById('registerForm');
-      const firstInput = document.getElementById('nombre');
-      const submitBtn = document.getElementById('submitBtn');
-      let lastFocus = null;
 
-      function openModal(){
-        lastFocus = document.activeElement;
-        modalBg.classList.add('show');
-        modalBg.setAttribute('aria-hidden','false');
-        setTimeout(()=> firstInput.focus(), 100);
-      }
-      function closeModal(){
-        modalBg.classList.remove('show');
-        modalBg.setAttribute('aria-hidden','true');
-        if(lastFocus) lastFocus.focus();
-      }
+(function(){
+  const openBtn = document.getElementById('btnOpenForm');
+  const modalBg = document.getElementById('modalBg');
+  const closeBtn = document.getElementById('btnCloseModal');
+  const form = document.getElementById('registerForm');
+  const firstInput = document.getElementById('nombre');
+  const submitBtn = document.getElementById('submitBtn');
+  const passwordInput = document.getElementById('password');
+  const password2Input = document.getElementById('password2');
+  const passwordError = document.getElementById('passwordError');
+  const successMsg = document.getElementById('successMsg');
+  let lastFocus = null;
 
-      openBtn.addEventListener('click', openModal);
-      closeBtn.addEventListener('click', closeModal);
-      modalBg.addEventListener('click', (e) => { if(e.target === modalBg) closeModal(); });
-      document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modalBg.classList.contains('show')) closeModal(); });
+  function openModal(){
+    lastFocus = document.activeElement;
+    modalBg.classList.add('show');
+    modalBg.setAttribute('aria-hidden','false');
+    setTimeout(()=> firstInput.focus(), 100);
+  }
+  function closeModal(){
+    modalBg.classList.remove('show');
+    modalBg.setAttribute('aria-hidden','true');
+    if(successMsg) successMsg.style.display = 'none';
+    if(lastFocus) lastFocus.focus();
+  }
 
-      form.addEventListener('submit', async (ev) => {
-        ev.preventDefault();
-        // alert('DEBUG');
-        // console.log('DEBUG: Se presionó Enviar Registro');
-        if(!form.checkValidity()){ form.reportValidity(); return; }
+  openBtn.addEventListener('click', openModal);
+  closeBtn.addEventListener('click', closeModal);
+  modalBg.addEventListener('click', (e) => { if(e.target === modalBg) closeModal(); });
+  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modalBg.classList.contains('show')) closeModal(); });
 
-        const payload = {
-          name: form.nombre.value.trim(),
-          apellido: form.apellido.value.trim(),
-          CI: form.CI.value.trim(),
-          email: form.email.value.trim(),
-          password: form.password.value,
-          estadoRegistro: "Pendiente"
-        };
+  form.addEventListener('submit', async (ev) => {
+    ev.preventDefault();
+    passwordError.style.display = 'none';
+    passwordError.textContent = '';
+    if(successMsg) { successMsg.style.display = 'none'; successMsg.textContent = ''; }
+    if(!form.checkValidity()){ form.reportValidity(); return; }
 
-        try{
-          submitBtn.disabled = true;
-          submitBtn.textContent = 'Enviando...';
-         
-          const res = await fetch('http://127.0.0.1:8000/api/user', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(payload)
-          });
-          if(res.ok){
-            alert('Registro enviado correctamente. ¡Gracias!');
-            form.reset();
-            closeModal();
-          } else {
-            let txt = 'Hubo un error al enviar el registro.';
-            try { const j = await res.json(); if(j && j.message) txt = j.message; } catch{}
-            alert(txt);
-          }
-        }catch(err){
-          console.error(err);
-          alert('Error de conexión, intente nuevamente.');
-        }finally{
-          submitBtn.disabled = false;
-          submitBtn.textContent = 'Enviar Registro';
-        }
+    if(passwordInput.value !== password2Input.value) {
+      passwordError.textContent = 'Las contraseñas no coinciden.';
+      passwordError.style.display = 'block';
+      password2Input.focus();
+      return;
+    }
+
+    const payload = {
+      name: form.nombre.value.trim(),
+      apellido: form.apellido.value.trim(),
+      CI: form.CI.value.trim(),
+      email: form.email.value.trim(),
+      password: form.password.value,
+      estadoRegistro: "Pendiente"
+    };
+
+    try{
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Enviando...';
+      const res = await fetch('http://127.0.0.1:8000/api/user', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify(payload)
       });
+      if(res.ok){
+        if(successMsg) {
+          successMsg.textContent = 'Registro enviado correctamente. ¡Gracias!';
+          successMsg.style.display = 'block';
+        }
+        form.reset();
+        setTimeout(() => { if(successMsg) successMsg.style.display = 'none'; closeModal(); }, 1800);
+      } else {
+        let txt = 'Hubo un error al enviar el registro.';
+        try { const j = await res.json(); if(j && j.message) txt = j.message; } catch{}
+        alert(txt);
+      }
+    }catch(err){
+      console.error(err);
+      alert('Error de conexión, intente nuevamente.');
+    }finally{
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Enviar Registro';
+    }
+  });
 
 
   const btnNavNosotros = document.getElementById('btnNavNosotros');
@@ -201,4 +217,4 @@ const contents = {
       scrollToSection(introContainer); // asegura scroll compensado
     });
   }
-    })();
+})();
