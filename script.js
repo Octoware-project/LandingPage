@@ -161,7 +161,6 @@ const contents = {
         alert(txt);
       }
     }catch(err){
-      console.error(err);
       alert('Error de conexión, intente nuevamente.');
     }finally{
       submitBtn.disabled = false;
