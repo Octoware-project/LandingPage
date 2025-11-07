@@ -5,6 +5,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sobre nosotros — Cooperativa</title>
 
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="img/IconoClaro.jpeg">
+
   <!-- Fuente -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
 
@@ -14,10 +17,20 @@
 
   <nav id="siteNav" aria-label="Barra de navegación">
     <div class="logo">Cooperativa ABC</div>
-    <div class="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#nosotros" id="btnNavNosotros">Nosotros</a>
-      <a href="#contacto" id="btnNavContacto">Contacto</a>
+    
+    <!-- Hamburger Menu Button -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="line line-1" d="M3 6H21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path class="line line-2" d="M3 12H21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path class="line line-3" d="M3 18H21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    
+    <div class="nav-links" id="navLinks">
+      <a href="#inicio" class="nav-link">Inicio</a>
+      <a href="#nosotros" id="btnNavNosotros" class="nav-link">Nosotros</a>
+      <a href="#contacto" id="btnNavContacto" class="nav-link">Contacto</a>
       <button id="btnOpenForm">Registrar</button>
     </div>
   </nav>
@@ -27,7 +40,8 @@
     <p class="lead">Conoce nuestra misión, visión y objetivos. Haz clic en cada opción para ver más información.</p>
   </div>
 
-  <main id="nosotros">
+  <!-- SECCIÓN DESKTOP CON BOTONES -->
+  <main id="nosotros" class="desktop-only">
     <div class="about-card clean-about-card" aria-label="Secciones principales">
       <nav class="side" role="tablist" aria-orientation="vertical">
         <button class="side-btn" role="tab" aria-selected="true" data-key="mision">Misión</button>
@@ -37,6 +51,34 @@
       <div class="panel clean-panel" id="panel" role="tabpanel" tabindex="0" aria-live="polite"></div>
     </div>
   </main>
+
+  <!-- SECCIÓN MOBILE CON SCROLL VERTICAL -->
+  <section id="nosotrosMobile" class="mobile-only">
+    <div class="mobile-content-container">
+      <!-- Misión -->
+      <div class="mobile-card">
+        <h2>Misión</h2>
+        <p>Nuestra misión es impulsar el desarrollo social y comunitario a través de la cooperación y la solidaridad.</p>
+        <img src="img/Personas.jpeg" alt="Misión">
+      </div>
+      
+      <!-- Visión -->
+      <div class="mobile-card">
+        <h2>Visión</h2>
+        <p>Ser una cooperativa referente en innovación social, inclusión y participación activa de sus miembros.</p>
+        <img src="img/ManosUnidas.jpg" alt="Visión">
+      </div>
+      
+      <!-- Objetivos -->
+      <div class="mobile-card">
+        <h2>Objetivos</h2>
+        <p>1. Fomentar la participación de los socios.
+2. Desarrollar proyectos sostenibles.
+3. Promover la educación cooperativa.</p>
+        <img src="img/CooperativaEnConstruccion.jpg" alt="Objetivos">
+      </div>
+    </div>
+  </section>
 
   <!-- SECCIÓN SOBRE NOSOTROS -->
   <section id="sobreNosotros" style="display:none; max-width:900px; margin:2.5rem auto;">
@@ -123,17 +165,17 @@
 
         <div class="field">
           <label for="email">Email *</label>
-          <input id="email" name="email" type="email" required placeholder="correo@ejemplo.com" />
+          <input id="email" name="email" type="email" required placeholder="correo@ejemplo.com" autocomplete="email" />
         </div>
 
 
         <div class="field">
           <label for="password">Contraseña *</label>
-          <input id="password" name="password" type="password" minlength="6" required placeholder="mínimo 6 caracteres" />
+          <input id="password" name="password" type="password" minlength="6" required placeholder="mínimo 6 caracteres" autocomplete="new-password" />
         </div>
         <div class="field">
           <label for="password2">Repetir Contraseña *</label>
-          <input id="password2" name="password2" type="password" minlength="6" required placeholder="Repite la contraseña" />
+          <input id="password2" name="password2" type="password" minlength="6" required placeholder="Repite la contraseña" autocomplete="new-password" />
         </div>
 
   <div class="field" id="passwordError" style="color:#d32f2f; font-size:0.98em; display:none;"></div>
@@ -148,9 +190,6 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
-</body>
-</html>
   <script src="script.js"></script>
 </body>
 </html>

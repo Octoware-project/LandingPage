@@ -1,23 +1,23 @@
 const contents = {
-      mision: {
-        title: "Misión",
-        body: "Nuestra misión es impulsar el desarrollo social y comunitario a través de la cooperación y la solidaridad.",
-        img: "img/mision.jpg"
-      },
-      vision: {
-        title: "Visión",
-        body: "Ser una cooperativa referente en innovación social, inclusión y participación activa de sus miembros.",
-        img: "img/vision.jpg"
-      },
-      objetivos: {
-        title: "Objetivos",
-        body: "1. Fomentar la participación de los socios.\n2. Desarrollar proyectos sostenibles.\n3. Promover la educación cooperativa.",
-        img: "img/objetivos.jpg"
-      }
-    };
+  mision: {
+    title: "Misión",
+    body: "Nuestra misión es impulsar el desarrollo social y comunitario a través de la cooperación y la solidaridad.",
+    img: "img/Personas.jpeg"
+  },
+  vision: {
+    title: "Visión",
+    body: "Ser una cooperativa referente en innovación social, inclusión y participación activa de sus miembros.",
+    img: "img/ManosUnidas.jpg"
+  },
+  objetivos: {
+    title: "Objetivos",
+    body: "1. Fomentar la participación de los socios.\n2. Desarrollar proyectos sostenibles.\n3. Promover la educación cooperativa.",
+    img: "img/CooperativaEnConstruccion.jpg"
+  }
+};
 
-    document.addEventListener('DOMContentLoaded', () => {
-      // --- NUEVO BLOQUE PARA LA SECCIÓN PRINCIPAL ---
+document.addEventListener('DOMContentLoaded', () => {
+  // --- SECCIÓN PRINCIPAL CON BOTONES ---
   const buttons = Array.from(document.querySelectorAll('.side-btn'));
   const panel = document.getElementById('panel');
 
@@ -56,42 +56,48 @@ const contents = {
   });
 
   // inicial
-  const first = buttons[0];
-  setActive(first);
-  render(first.dataset.key);
+  if(buttons.length > 0){
+    const first = buttons[0];
+    setActive(first);
+    render(first.dataset.key);
+  }
 
-      // Modal
-      const modalBg = document.getElementById('modalBg');
-      const btnOpenForm = document.getElementById('btnOpenForm');
-      const btnCloseModal = document.getElementById('btnCloseModal');
-
-      function openModal(){ modalBg.classList.add('show'); modalBg.setAttribute('aria-hidden','false'); setTimeout(()=>{ const firstInput=modalBg.querySelector('input'); if(firstInput) firstInput.focus(); },120);}
-      function closeModal(){ modalBg.classList.remove('show'); modalBg.setAttribute('aria-hidden','true'); btnOpenForm.focus(); }
-
-      btnOpenForm.addEventListener('click', openModal);
-      btnCloseModal.addEventListener('click', closeModal);
-      modalBg.addEventListener('click', (e)=>{ if(e.target===modalBg) closeModal(); });
-      document.addEventListener('keydown', (e)=>{ if(e.key==='Escape' && modalBg.classList.contains('show')) closeModal(); });
-
-      // Navbar animación con scroll
-      const nav = document.getElementById('siteNav');
-      let lastScroll=window.scrollY;
-
-      window.addEventListener('scroll', ()=>{
-        const current=window.scrollY;
-        if(current>lastScroll && current>60){ nav.classList.add('oculto'); }
-        else{ nav.classList.remove('oculto'); }
-        lastScroll=current;
+  // --- HAMBURGER MENU MOBILE ---
+  const hamburger = document.getElementById('hamburger');
+  const navLinks = document.getElementById('navLinks');
+  const nav = document.getElementById('siteNav');
+  const navLinkItems = document.querySelectorAll('.nav-link');
+  
+  if(hamburger && navLinks){
+    hamburger.addEventListener('click', (e)=>{
+      e.stopPropagation();
+      const isActive = hamburger.classList.toggle('active');
+      navLinks.classList.toggle('active');
+      hamburger.setAttribute('aria-expanded', isActive);
+    });
+    
+    navLinkItems.forEach(link => {
+      link.addEventListener('click', ()=>{
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
       });
     });
-    /* Modal y formulario */
+    
+    document.addEventListener('click', (e)=>{
+      if(!nav.contains(e.target) && navLinks.classList.contains('active')){
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
 
-(function(){
-  const openBtn = document.getElementById('btnOpenForm');
+  // --- MODAL Y FORMULARIO ---
   const modalBg = document.getElementById('modalBg');
-  const closeBtn = document.getElementById('btnCloseModal');
+  const btnOpenForm = document.getElementById('btnOpenForm');
+  const btnCloseModal = document.getElementById('btnCloseModal');
   const form = document.getElementById('registerForm');
-  const firstInput = document.getElementById('nombre');
   const submitBtn = document.getElementById('submitBtn');
   const passwordInput = document.getElementById('password');
   const password2Input = document.getElementById('password2');
@@ -99,23 +105,58 @@ const contents = {
   const successMsg = document.getElementById('successMsg');
   let lastFocus = null;
 
-  function openModal(){
+  function openModal(){ 
     lastFocus = document.activeElement;
-    modalBg.classList.add('show');
-    modalBg.setAttribute('aria-hidden','false');
-    setTimeout(()=> firstInput.focus(), 100);
+    modalBg.classList.add('show'); 
+    modalBg.setAttribute('aria-hidden','false'); 
+    if(hamburger){
+      hamburger.classList.remove('active');
+      navLinks.classList.remove('active');
+      hamburger.setAttribute('aria-expanded', 'false');
+    }
+    setTimeout(()=>{ 
+      const firstInput = modalBg.querySelector('input'); 
+      if(firstInput) firstInput.focus(); 
+    }, 120);
   }
-  function closeModal(){
-    modalBg.classList.remove('show');
-    modalBg.setAttribute('aria-hidden','true');
-    if(successMsg) successMsg.style.display = 'none';
-    if(lastFocus) lastFocus.focus();
+  
+  function closeModal(){ 
+    // Remover focus de cualquier elemento dentro del modal primero
+    if(document.activeElement && modalBg.contains(document.activeElement)){
+      document.activeElement.blur();
+    }
+    
+    modalBg.classList.remove('show'); 
+    modalBg.setAttribute('aria-hidden','true'); 
+    
+    // Recargar la página
+    setTimeout(() => {
+      window.location.reload();
+    }, 200);
   }
 
-  openBtn.addEventListener('click', openModal);
-  closeBtn.addEventListener('click', closeModal);
+  btnOpenForm.addEventListener('click', openModal);
+  btnCloseModal.addEventListener('click', closeModal);
   modalBg.addEventListener('click', (e) => { if(e.target === modalBg) closeModal(); });
-  document.addEventListener('keydown', (e) => { if(e.key === 'Escape' && modalBg.classList.contains('show')) closeModal(); });
+  
+  // --- GESTIÓN CENTRALIZADA DE TECLA ESCAPE ---
+  document.addEventListener('keydown', (e) => { 
+    if(e.key === 'Escape'){
+      // Prioridad 1: Cerrar modal si está abierto
+      if(modalBg.classList.contains('show')){
+        closeModal();
+        e.preventDefault();
+        return;
+      }
+      // Prioridad 2: Cerrar menú hamburguesa si está abierto
+      if(hamburger && navLinks.classList.contains('active')){
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+        e.preventDefault();
+      }
+    }
+  });
 
   form.addEventListener('submit', async (ev) => {
     ev.preventDefault();
@@ -154,7 +195,10 @@ const contents = {
           successMsg.style.display = 'block';
         }
         form.reset();
-        setTimeout(() => { if(successMsg) successMsg.style.display = 'none'; closeModal(); }, 1800);
+        setTimeout(() => { 
+          if(successMsg) successMsg.style.display = 'none'; 
+          closeModal(); 
+        }, 1800);
       } else {
         let txt = 'Hubo un error al enviar el registro.';
         try { const j = await res.json(); if(j && j.message) txt = j.message; } catch{}
@@ -168,52 +212,85 @@ const contents = {
     }
   });
 
+  // --- NAVBAR SCROLL HIDE ---
+  let lastScroll = window.scrollY;
 
+  window.addEventListener('scroll', ()=>{
+    const current = window.scrollY;
+    if(current > lastScroll && current > 60){ 
+      nav.classList.add('nav-hidden'); 
+      if(hamburger && navLinks.classList.contains('active')){
+        hamburger.classList.remove('active');
+        navLinks.classList.remove('active');
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
+    }
+    else{ 
+      nav.classList.remove('nav-hidden'); 
+    }
+    lastScroll = current;
+  });
+
+  // --- NAVEGACIÓN ENTRE SECCIONES ---
   const btnNavNosotros = document.getElementById('btnNavNosotros');
   const seccionSobreNosotros = document.getElementById('sobreNosotros');
   const mainNosotros = document.getElementById('nosotros');
+  const nosotrosMobile = document.getElementById('nosotrosMobile');
   const introContainer = document.getElementById('inicio');
   const btnNavContacto = document.getElementById('btnNavContacto');
   const seccionContacto = document.getElementById('seccionContacto');
+  const btnNavInicio = document.querySelector('a[href="#inicio"]');
+
+  function ocultarTodasLasSecciones() {
+    if (mainNosotros) mainNosotros.style.display = 'none';
+    if (nosotrosMobile) nosotrosMobile.style.display = 'none';
+    if (introContainer) introContainer.style.display = 'none';
+    if (seccionSobreNosotros) seccionSobreNosotros.style.display = 'none';
+    if (seccionContacto) seccionContacto.style.display = 'none';
+  }
 
   function scrollToSection(section) {
     if (!section) return;
-    const nav = document.getElementById('siteNav');
     const navHeight = nav ? nav.offsetHeight : 70;
     const rect = section.getBoundingClientRect();
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-    const top = rect.top + scrollTop - navHeight - 12; // 12px extra margen opcional
+    const top = rect.top + scrollTop - navHeight - 12;
     window.scrollTo({ top, behavior: 'smooth' });
   }
 
-  btnNavNosotros.addEventListener('click', (e) => {
-    e.preventDefault();
-    if (mainNosotros) mainNosotros.style.display = 'none';
-    if (introContainer) introContainer.style.display = 'none';
-    if (seccionSobreNosotros) seccionSobreNosotros.style.display = '';
-    if (seccionContacto) seccionContacto.style.display = 'none';
-    scrollToSection(seccionSobreNosotros);
-  });
+  // Botón "Nosotros" - Muestra "Sobre Nosotros"
+  if(btnNavNosotros){
+    btnNavNosotros.addEventListener('click', (e) => {
+      e.preventDefault();
+      ocultarTodasLasSecciones();
+      if (seccionSobreNosotros) {
+        seccionSobreNosotros.style.display = 'block';
+        scrollToSection(seccionSobreNosotros);
+      }
+    });
+  }
 
+  // Botón "Contacto" - Muestra la sección de contacto
   if (btnNavContacto) {
     btnNavContacto.addEventListener('click', (e) => {
       e.preventDefault();
-      if (mainNosotros) mainNosotros.style.display = 'none';
-      if (introContainer) introContainer.style.display = 'none';
-      if (seccionSobreNosotros) seccionSobreNosotros.style.display = 'none';
-      if (seccionContacto) seccionContacto.style.display = '';
-      scrollToSection(seccionContacto);
+      ocultarTodasLasSecciones();
+      if (seccionContacto) {
+        seccionContacto.style.display = 'block';
+        scrollToSection(seccionContacto);
+      }
     });
   }
 
-  const btnNavInicio = document.querySelector('a[href="#inicio"]');
+  // Botón "Inicio" - Muestra intro + secciones principales (desktop/mobile)
   if (btnNavInicio) {
     btnNavInicio.addEventListener('click', (e) => {
-      if (mainNosotros) mainNosotros.style.display = '';
-      if (introContainer) introContainer.style.display = '';
-      if (seccionSobreNosotros) seccionSobreNosotros.style.display = 'none';
-      if (seccionContacto) seccionContacto.style.display = 'none';
-      scrollToSection(introContainer); // asegura scroll compensado
+      e.preventDefault();
+      ocultarTodasLasSecciones();
+      if (introContainer) introContainer.style.display = 'block';
+      if (mainNosotros) mainNosotros.style.display = 'block';
+      if (nosotrosMobile) nosotrosMobile.style.display = 'block';
+      scrollToSection(introContainer);
     });
   }
-})();
+});
