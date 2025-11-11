@@ -1,17 +1,17 @@
 const contents = {
   mision: {
     title: "Misión",
-    body: "Nuestra misión es impulsar el desarrollo social y comunitario a través de la cooperación y la solidaridad.",
+    body: "Desarrollar una solución de software innovadora que digitalice y optimice la gestión cooperativa, promoviendo la transparencia total en todas las operaciones. OctoCoop facilita el acceso a la información y fortalece la confianza entre los socios mediante herramientas tecnológicas intuitivas y seguras.",
     img: "img/Personas.jpeg"
   },
   vision: {
     title: "Visión",
-    body: "Ser una cooperativa referente en innovación social, inclusión y participación activa de sus miembros.",
+    body: "Ser la plataforma líder en gestión cooperativa, reconocida por impulsar la transparencia organizacional y la participación democrática. Buscamos transformar digitalmente el cooperativismo, haciendo que cada socio tenga acceso inmediato a comprobantes, registros de horas, planes y decisiones de asamblea.",
     img: "img/ManosUnidas.jpg"
   },
   objetivos: {
     title: "Objetivos",
-    body: "1. Fomentar la participación de los socios.\n2. Desarrollar proyectos sostenibles.\n3. Promover la educación cooperativa.",
+    body: "1. Garantizar transparencia mediante el acceso digital a todos los comprobantes y documentos.\n2. Facilitar el registro y consulta de horas trabajadas de forma organizada.\n3. Proporcionar información clara sobre planes cooperativos y decisiones de asamblea.\n4. Optimizar la comunicación y organización interna de las cooperativas.",
     img: "img/CooperativaEnConstruccion.jpg"
   }
 };
@@ -31,6 +31,7 @@ document.addEventListener('DOMContentLoaded', () => {
   function render(key) {
     const data = contents[key];
     if (!data) return;
+    
     panel.innerHTML = '';
     const wrap = document.createElement('div');
     wrap.className = 'fade';
@@ -46,6 +47,20 @@ document.addEventListener('DOMContentLoaded', () => {
     wrap.appendChild(img);
     panel.appendChild(wrap);
     panel.focus();
+    
+    // Scroll al inicio del panel después de renderizar
+    requestAnimationFrame(() => {
+      panel.scrollTop = 0;
+    });
+    
+    // Verificar si hay contenido que scrollear y mostrar indicador
+    setTimeout(() => {
+      if (panel.scrollHeight > panel.clientHeight) {
+        panel.classList.add('has-scroll');
+      } else {
+        panel.classList.remove('has-scroll');
+      }
+    }, 100);
   }
 
   buttons.forEach(btn => {
@@ -93,6 +108,28 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  // --- FUNCIÓN PARA MOSTRAR ALERT MODERNO ---
+  function showCustomAlert(title, message) {
+    const alertOverlay = document.getElementById('alertOverlay');
+    if (!alertOverlay) return;
+    
+    const titleElement = alertOverlay.querySelector('.alert-modal-title');
+    const messageElement = alertOverlay.querySelector('.alert-modal-message');
+    
+    if (titleElement) titleElement.textContent = title;
+    if (messageElement) messageElement.textContent = message;
+    
+    alertOverlay.classList.add('show');
+  }
+
+  // --- BOTÓN ACEPTAR DEL ALERT ---
+  const alertAcceptBtn = document.getElementById('alertAcceptBtn');
+  if (alertAcceptBtn) {
+    alertAcceptBtn.addEventListener('click', () => {
+      location.reload();
+    });
+  }
+
   // --- MODAL Y FORMULARIO ---
   const modalBg = document.getElementById('modalBg');
   const btnOpenForm = document.getElementById('btnOpenForm');
@@ -102,11 +139,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const passwordInput = document.getElementById('password');
   const password2Input = document.getElementById('password2');
   const passwordError = document.getElementById('passwordError');
-  const successMsg = document.getElementById('successMsg');
-  let lastFocus = null;
 
   function openModal(){ 
-    lastFocus = document.activeElement;
     modalBg.classList.add('show'); 
     modalBg.setAttribute('aria-hidden','false'); 
     if(hamburger){
@@ -127,12 +161,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     
     modalBg.classList.remove('show'); 
-    modalBg.setAttribute('aria-hidden','true'); 
-    
-    // Recargar la página
-    setTimeout(() => {
-      window.location.reload();
-    }, 200);
+    modalBg.setAttribute('aria-hidden','true');
   }
 
   btnOpenForm.addEventListener('click', openModal);
@@ -142,13 +171,11 @@ document.addEventListener('DOMContentLoaded', () => {
   // --- GESTIÓN CENTRALIZADA DE TECLA ESCAPE ---
   document.addEventListener('keydown', (e) => { 
     if(e.key === 'Escape'){
-      // Prioridad 1: Cerrar modal si está abierto
       if(modalBg.classList.contains('show')){
         closeModal();
         e.preventDefault();
         return;
       }
-      // Prioridad 2: Cerrar menú hamburguesa si está abierto
       if(hamburger && navLinks.classList.contains('active')){
         hamburger.classList.remove('active');
         navLinks.classList.remove('active');
@@ -162,7 +189,6 @@ document.addEventListener('DOMContentLoaded', () => {
     ev.preventDefault();
     passwordError.style.display = 'none';
     passwordError.textContent = '';
-    if(successMsg) { successMsg.style.display = 'none'; successMsg.textContent = ''; }
     if(!form.checkValidity()){ form.reportValidity(); return; }
 
     if(passwordInput.value !== password2Input.value) {
@@ -190,15 +216,9 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify(payload)
       });
       if(res.ok){
-        if(successMsg) {
-          successMsg.textContent = 'Registro enviado correctamente. ¡Gracias!';
-          successMsg.style.display = 'block';
-        }
         form.reset();
-        setTimeout(() => { 
-          if(successMsg) successMsg.style.display = 'none'; 
-          closeModal(); 
-        }, 1800);
+        closeModal();
+        showCustomAlert('¡Registro Exitoso!', 'Serás avisado cuando sea aceptado y podrás ingresar a la aplicación con las credenciales que proporcionaste.');
       } else {
         let txt = 'Hubo un error al enviar el registro.';
         try { const j = await res.json(); if(j && j.message) txt = j.message; } catch{}
@@ -232,21 +252,25 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 
   // --- NAVEGACIÓN ENTRE SECCIONES ---
+  const btnNavInicio = document.getElementById('btnNavInicio');
   const btnNavNosotros = document.getElementById('btnNavNosotros');
-  const seccionSobreNosotros = document.getElementById('sobreNosotros');
-  const mainNosotros = document.getElementById('nosotros');
-  const nosotrosMobile = document.getElementById('nosotrosMobile');
-  const introContainer = document.getElementById('inicio');
   const btnNavContacto = document.getElementById('btnNavContacto');
+  
+  // Secciones compartidas
+  const introContainer = document.getElementById('inicio');
+  
+  // Secciones Desktop
+  const mainNosotros = document.getElementById('nosotros');
+  const seccionSobreNosotros = document.getElementById('sobreNosotros');
   const seccionContacto = document.getElementById('seccionContacto');
-  const btnNavInicio = document.querySelector('a[href="#inicio"]');
+  
+  // Secciones Mobile
+  const nosotrosMobile = document.getElementById('nosotrosMobile');
+  const sobreNosotrosMobile = document.getElementById('sobreNosotrosMobile');
+  const contactoMobile = document.getElementById('seccionContactoMobile');
 
-  function ocultarTodasLasSecciones() {
-    if (mainNosotros) mainNosotros.style.display = 'none';
-    if (nosotrosMobile) nosotrosMobile.style.display = 'none';
-    if (introContainer) introContainer.style.display = 'none';
-    if (seccionSobreNosotros) seccionSobreNosotros.style.display = 'none';
-    if (seccionContacto) seccionContacto.style.display = 'none';
+  function isMobileView() {
+    return window.innerWidth <= 768;
   }
 
   function scrollToSection(section) {
@@ -258,39 +282,72 @@ document.addEventListener('DOMContentLoaded', () => {
     window.scrollTo({ top, behavior: 'smooth' });
   }
 
-  // Botón "Nosotros" - Muestra "Sobre Nosotros"
+  // Asegurar que todas las secciones mobile estén visibles al cargar en mobile
+  function inicializarVistaMobile() {
+    if (isMobileView()) {
+      // Mostrar todas las secciones mobile
+      if (introContainer) introContainer.style.display = 'block';
+      if (nosotrosMobile) nosotrosMobile.style.display = 'block';
+      if (sobreNosotrosMobile) sobreNosotrosMobile.style.display = 'block';
+      if (contactoMobile) contactoMobile.style.display = 'block';
+    }
+  }
+
+  // Inicializar al cargar
+  inicializarVistaMobile();
+
+  // Botón "Inicio"
+  if(btnNavInicio){
+    btnNavInicio.addEventListener('click', (e) => {
+      if (!isMobileView()) {
+        // Solo preventDefault en desktop
+        e.preventDefault();
+        // En desktop ocultar secciones secundarias y mostrar inicio
+        if (seccionSobreNosotros) seccionSobreNosotros.style.display = 'none';
+        if (seccionContacto) seccionContacto.style.display = 'none';
+        if (introContainer) introContainer.style.display = 'block';
+        if (mainNosotros) mainNosotros.style.display = 'block';
+        scrollToSection(introContainer);
+      }
+      // En mobile, dejar que el navegador haga scroll naturalmente con el href
+    });
+  }
+
+  // Botón "Nosotros"
   if(btnNavNosotros){
     btnNavNosotros.addEventListener('click', (e) => {
-      e.preventDefault();
-      ocultarTodasLasSecciones();
-      if (seccionSobreNosotros) {
-        seccionSobreNosotros.style.display = 'block';
-        scrollToSection(seccionSobreNosotros);
+      if (!isMobileView()) {
+        // Solo preventDefault en desktop
+        e.preventDefault();
+        // En desktop ocultar todo y mostrar solo "Sobre Nosotros"
+        if (introContainer) introContainer.style.display = 'none';
+        if (mainNosotros) mainNosotros.style.display = 'none';
+        if (seccionContacto) seccionContacto.style.display = 'none';
+        if (seccionSobreNosotros) {
+          seccionSobreNosotros.style.display = 'block';
+          scrollToSection(seccionSobreNosotros);
+        }
       }
+      // En mobile, dejar que el navegador haga scroll naturalmente con el href
     });
   }
 
-  // Botón "Contacto" - Muestra la sección de contacto
+  // Botón "Contacto"
   if (btnNavContacto) {
     btnNavContacto.addEventListener('click', (e) => {
-      e.preventDefault();
-      ocultarTodasLasSecciones();
-      if (seccionContacto) {
-        seccionContacto.style.display = 'block';
-        scrollToSection(seccionContacto);
+      if (!isMobileView()) {
+        // Solo preventDefault en desktop
+        e.preventDefault();
+        // En desktop ocultar todo y mostrar solo "Contacto"
+        if (introContainer) introContainer.style.display = 'none';
+        if (mainNosotros) mainNosotros.style.display = 'none';
+        if (seccionSobreNosotros) seccionSobreNosotros.style.display = 'none';
+        if (seccionContacto) {
+          seccionContacto.style.display = 'block';
+          scrollToSection(seccionContacto);
+        }
       }
-    });
-  }
-
-  // Botón "Inicio" - Muestra intro + secciones principales (desktop/mobile)
-  if (btnNavInicio) {
-    btnNavInicio.addEventListener('click', (e) => {
-      e.preventDefault();
-      ocultarTodasLasSecciones();
-      if (introContainer) introContainer.style.display = 'block';
-      if (mainNosotros) mainNosotros.style.display = 'block';
-      if (nosotrosMobile) nosotrosMobile.style.display = 'block';
-      scrollToSection(introContainer);
+      // En mobile, dejar que el navegador haga scroll naturalmente con el href
     });
   }
 });
