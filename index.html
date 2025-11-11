@@ -3,7 +3,10 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Sobre nosotros — Cooperativa</title>
+  <title>OctoCoop — Octoware | Gestión Cooperativa Transparente</title>
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/jpeg" href="img/IconoClaro.jpeg">
 
   <!-- Fuente -->
   <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;500;700;900&display=swap" rel="stylesheet">
@@ -13,21 +16,32 @@
 <body>
 
   <nav id="siteNav" aria-label="Barra de navegación">
-    <div class="logo">Cooperativa ABC</div>
-    <div class="nav-links">
-      <a href="#inicio">Inicio</a>
-      <a href="#nosotros" id="btnNavNosotros">Nosotros</a>
-      <a href="#contacto" id="btnNavContacto">Contacto</a>
+    <div class="logo">Octoware</div>
+    
+    <!-- Hamburger Menu Button -->
+    <button class="hamburger" id="hamburger" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path class="line line-1" d="M3 6H21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path class="line line-2" d="M3 12H21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+        <path class="line line-3" d="M3 18H21" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"/>
+      </svg>
+    </button>
+    
+    <div class="nav-links" id="navLinks">
+      <a href="#inicio" class="nav-link" id="btnNavInicio">Inicio</a>
+      <a href="#sobreNosotrosMobile" id="btnNavNosotros" class="nav-link">Nosotros</a>
+      <a href="#seccionContactoMobile" id="btnNavContacto" class="nav-link">Contacto</a>
       <button id="btnOpenForm">Registrar</button>
     </div>
   </nav>
 
   <div class="intro-container" id="inicio" role="region" aria-labelledby="introTitle">
-    <h1 id="introTitle">Cooperativa ESI</h1>
-    <p class="lead">Conoce nuestra misión, visión y objetivos. Haz clic en cada opción para ver más información.</p>
+    <h1 id="introTitle">OctoCoop by Octoware</h1>
+    <p class="lead">Plataforma de gestión cooperativa que revoluciona la transparencia y organización. Descubre cómo OctoCoop facilita la administración de comprobantes, horas, planes y asambleas.</p>
   </div>
 
-  <main id="nosotros">
+  <!-- SECCIÓN DESKTOP CON BOTONES -->
+  <main id="nosotros" class="desktop-only">
     <div class="about-card clean-about-card" aria-label="Secciones principales">
       <nav class="side" role="tablist" aria-orientation="vertical">
         <button class="side-btn" role="tab" aria-selected="true" data-key="mision">Misión</button>
@@ -38,47 +52,122 @@
     </div>
   </main>
 
-  <!-- SECCIÓN SOBRE NOSOTROS -->
-  <section id="sobreNosotros" style="display:none; max-width:900px; margin:2.5rem auto;">
+  <!-- SECCIÓN MOBILE CON SCROLL VERTICAL -->
+  <section id="nosotrosMobile" class="mobile-only">
+    <div class="mobile-content-container">
+      <!-- Misión -->
+      <div class="mobile-card">
+        <h2>Misión</h2>
+        <p>Desarrollar una solución de software innovadora que digitalice y optimice la gestión cooperativa, promoviendo la transparencia total en todas las operaciones. OctoCoop facilita el acceso a la información y fortalece la confianza entre los socios mediante herramientas tecnológicas intuitivas y seguras.</p>
+        <img src="img/Personas.jpeg" alt="Misión">
+      </div>
+      
+      <!-- Visión -->
+      <div class="mobile-card">
+        <h2>Visión</h2>
+        <p>Ser la plataforma líder en gestión cooperativa, reconocida por impulsar la transparencia organizacional y la participación democrática. Buscamos transformar digitalmente el cooperativismo, haciendo que cada socio tenga acceso inmediato a comprobantes, registros de horas, planes y decisiones de asamblea.</p>
+        <img src="img/ManosUnidas.jpg" alt="Visión">
+      </div>
+      
+      <!-- Objetivos -->
+      <div class="mobile-card">
+        <h2>Objetivos</h2>
+        <p>1. Garantizar transparencia mediante el acceso digital a todos los comprobantes y documentos.
+2. Facilitar el registro y consulta de horas trabajadas de forma organizada.
+3. Proporcionar información clara sobre planes cooperativos y decisiones de asamblea.
+4. Optimizar la comunicación y organización interna de las cooperativas.</p>
+        <img src="img/CooperativaEnConstruccion.jpg" alt="Objetivos">
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECCIÓN NOSOTROS - DESKTOP ========== -->
+  <section id="sobreNosotros" class="desktop-only" style="display:none;">
     <main style="max-width: 900px; margin: 2.5rem auto; display: flex; gap: 2rem;">
       <!-- Contenedor izquierdo: texto -->
       <section style="flex:1; display: flex; flex-direction: column; gap: 1.8rem;">
         <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 16px; padding: 1.8rem 2.5rem; box-shadow: 0 10px 20px rgba(222,95,136,0.3); color:#3c3c3c; font-size:1.15rem; line-height:1.6; user-select:text;">
-          En <strong>Cooperativa Horizonte Solidario</strong> creemos que el cambio real comienza cuando las personas se unen por un propósito común.
+          En <strong>Octoware</strong> creemos que la tecnología puede transformar la gestión cooperativa. Desarrollamos <strong>OctoCoop</strong>, una plataforma diseñada para digitalizar y optimizar todos los procesos administrativos de las cooperativas.
         </div>
         <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 16px; padding: 1.8rem 2.5rem; box-shadow: 0 10px 20px rgba(222,95,136,0.3); color:#3c3c3c; font-size:1.15rem; line-height:1.6; user-select:text;">
-          Nacimos en 2015 con un grupo de vecinos que soñaban con mejorar su calidad de vida y la de su comunidad, apostando por un modelo de trabajo basado en la cooperación, la igualdad y el compromiso social.
+          <strong>OctoCoop</strong> nace de la necesidad de modernizar el cooperativismo, brindando herramientas que garantizan <strong>transparencia total</strong> en cada operación y <strong>organización eficiente</strong> de toda la información.
         </div>
         <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 16px; padding: 1.8rem 2.5rem; box-shadow: 0 10px 20px rgba(222,95,136,0.3); color:#3c3c3c; font-size:1.15rem; line-height:1.6; user-select:text;">
-          Hoy, más de 120 socios trabajamos codo a codo para desarrollar proyectos de vivienda accesible, espacios comunitarios y programas de formación que fortalezcan nuestras capacidades y generen oportunidades para todos.
+          Nuestra plataforma permite <strong>guardar y consultar comprobantes</strong> de forma segura, <strong>registrar horas trabajadas</strong> con precisión, <strong>acceder a planes cooperativos</strong> actualizados y <strong>revisar decisiones de asamblea</strong> en cualquier momento.
         </div>
         <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 16px; padding: 1.8rem 2.5rem; box-shadow: 0 10px 20px rgba(222,95,136,0.3); color:#3c3c3c; font-size:1.15rem; line-height:1.6; user-select:text;">
-          Nuestro compromiso no se limita a construir hogares: queremos construir un futuro más justo, donde cada persona tenga un lugar digno para vivir y desarrollarse.
-          Guiados por los principios cooperativos, practicamos la ayuda mutua, la gestión democrática y la responsabilidad compartida, siempre con transparencia y cercanía.
+          Con OctoCoop, cada socio tiene acceso inmediato a toda la información relevante, fortaleciendo la <strong>confianza</strong> y la <strong>participación democrática</strong>. Promovemos una gestión donde cada dato está al alcance de quien lo necesita.
         </div>
         <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 16px; padding: 1.8rem 2.5rem; box-shadow: 0 10px 20px rgba(222,95,136,0.3); color:#3c3c3c; font-size:1.15rem; line-height:1.6; user-select:text;">
-          En Horizonte Solidario creemos que la unión no solo hace la fuerza: también hace comunidad, esperanza y progreso.
+          En <strong>Octoware</strong> no solo construimos software: construimos puentes hacia una gestión cooperativa más <strong>transparente, organizada y eficiente</strong>, donde la tecnología se pone al servicio de los valores cooperativos.
         </div>
       </section>
       <!-- Contenedor derecho: imágenes scrollables -->
       <section style="flex:1; max-height: auto; overflow-y: auto; border-radius: 16px; box-shadow: 0 10px 20px rgba(222,95,136,0.3); background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); padding: 1rem;">
-        <img src="img/ImagenEjemplo.jpg" alt="Ejemplo 1" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
-        <img src="img/ImagenEjemplo.jpg" alt="Ejemplo 2" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
-        <img src="img/ImagenEjemplo.jpg" alt="Ejemplo 3" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
-        <img src="img/ImagenEjemplo.jpg" alt="Ejemplo 4" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
+        <img src="img/Cooperativa_1.jpg" alt="Ejemplo 1" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
+        <img src="img/Cooperativa_2.jpg" alt="Ejemplo 2" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
+        <img src="img/Cooperativa_3.jpeg" alt="Ejemplo 3" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
+        <img src="img/Cooperativa_4.jpg" alt="Ejemplo 4" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
+        <img src="img/Cooperativa_5.jpeg" alt="Ejemplo 5" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
+        <img src="img/Cooperativa_6.jpg" alt="Ejemplo 6" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
+        <img src="img/Cooperativa_7.jpeg" alt="Ejemplo 7" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
+        <img src="img/Cooperativa_8.jpeg" alt="Ejemplo 8" style="width: 68%; border-radius: 14px; margin-bottom: 1rem; display: block; margin-left: auto; margin-right: auto;" />
       </section>
     </main>
   </section>
 
-  <!--  SECCIÓN CONTACTO  -->
-  <section id="seccionContacto" style="display:none; max-width:900px; margin:2.5rem auto;">
+  <!-- ========== SECCIÓN NOSOTROS - MOBILE ========== -->
+  <section id="sobreNosotrosMobile" class="mobile-only">
+    <div class="mobile-content-container" style="padding: 1rem;">
+      <div class="mobile-card">
+        <h2 style="color:#de5f88; font-size:1.5rem; margin-bottom:1rem;">Sobre Nosotros</h2>
+        <div style="display: flex; flex-direction: column; gap: 1rem;">
+          <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 12px; padding: 1rem 1.2rem; box-shadow: 0 6px 15px rgba(222,95,136,0.2);">
+            <p style="color:#3c3c3c; font-size:0.95rem; line-height:1.6; margin:0;">
+              En <strong>Octoware</strong> creemos que la tecnología puede transformar la gestión cooperativa. Desarrollamos <strong>OctoCoop</strong>, una plataforma diseñada para digitalizar y optimizar todos los procesos administrativos de las cooperativas.
+            </p>
+          </div>
+          <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 12px; padding: 1rem 1.2rem; box-shadow: 0 6px 15px rgba(222,95,136,0.2);">
+            <p style="color:#3c3c3c; font-size:0.95rem; line-height:1.6; margin:0;">
+              <strong>OctoCoop</strong> nace de la necesidad de modernizar el cooperativismo, brindando herramientas que garantizan <strong>transparencia total</strong> en cada operación y <strong>organización eficiente</strong> de toda la información.
+            </p>
+          </div>
+          <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 12px; padding: 1rem 1.2rem; box-shadow: 0 6px 15px rgba(222,95,136,0.2);">
+            <p style="color:#3c3c3c; font-size:0.95rem; line-height:1.6; margin:0;">
+              Nuestra plataforma permite <strong>guardar y consultar comprobantes</strong> de forma segura, <strong>registrar horas trabajadas</strong> con precisión, <strong>acceder a planes cooperativos</strong> actualizados y <strong>revisar decisiones de asamblea</strong> en cualquier momento.
+            </p>
+          </div>
+          <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 12px; padding: 1rem 1.2rem; box-shadow: 0 6px 15px rgba(222,95,136,0.2);">
+            <p style="color:#3c3c3c; font-size:0.95rem; line-height:1.6; margin:0;">
+              Con OctoCoop, cada socio tiene acceso inmediato a toda la información relevante, fortaleciendo la <strong>confianza</strong> y la <strong>participación democrática</strong>. Promovemos una gestión donde cada dato está al alcance de quien lo necesita.
+            </p>
+          </div>
+          <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 12px; padding: 1rem 1.2rem; box-shadow: 0 6px 15px rgba(222,95,136,0.2);">
+            <p style="color:#3c3c3c; font-size:0.95rem; line-height:1.6; margin:0;">
+              En <strong>Octoware</strong> no solo construimos software: construimos puentes hacia una gestión cooperativa más <strong>transparente, organizada y eficiente</strong>, donde la tecnología se pone al servicio de los valores cooperativos.
+            </p>
+          </div>
+        </div>
+        <!-- Galería de imágenes -->
+        <div style="margin-top:1.5rem; display:grid; grid-template-columns: repeat(2, 1fr); gap:0.8rem;">
+          <img src="img/Cooperativa_1.jpg" alt="Cooperativa 1" style="width:100%; border-radius:10px; object-fit:cover; height:150px; box-shadow: 0 4px 10px rgba(222,95,136,0.15);">
+          <img src="img/Cooperativa_2.jpg" alt="Cooperativa 2" style="width:100%; border-radius:10px; object-fit:cover; height:150px; box-shadow: 0 4px 10px rgba(222,95,136,0.15);">
+          <img src="img/Cooperativa_3.jpeg" alt="Cooperativa 3" style="width:100%; border-radius:10px; object-fit:cover; height:150px; box-shadow: 0 4px 10px rgba(222,95,136,0.15);">
+          <img src="img/Cooperativa_4.jpg" alt="Cooperativa 4" style="width:100%; border-radius:10px; object-fit:cover; height:150px; box-shadow: 0 4px 10px rgba(222,95,136,0.15);">
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== SECCIÓN CONTACTO - DESKTOP ========== -->
+  <section id="seccionContacto" class="desktop-only" style="display:none;">
     <main style="max-width: 900px; margin: 2.5rem auto; display: flex; gap: 2rem;">
       <section style="flex:1; display: flex; flex-direction: column; gap: 1.8rem;">
         <div style="background: linear-gradient(135deg, #ffc1e3 0%, #a3d8f4 100%); border-radius: 16px; padding: 2rem 2.5rem; box-shadow: 0 10px 20px rgba(163,216,244,0.18); color:#3c3c3c; font-size:1.15rem; line-height:1.6;">
           <h2 style="color:#de5f88; margin-bottom:1rem;">Contacto</h2>
           <p>¿Tienes dudas, sugerencias o quieres sumarte a la cooperativa? ¡Escríbenos!</p>
           <ul style="list-style:none; padding:0; margin:1.2rem 0 0 0;">
-            <li><strong>Email:</strong> info@cooperativaabc.com</li>
+            <li><strong>Email:</strong> contacto@octocoop.com</li>
             <li><strong>Teléfono:</strong> +598 1234 5678</li>
             <li><strong>Dirección:</strong> Av. Ejemplo 1234, Montevideo</li>
           </ul>
@@ -93,12 +182,40 @@
         </div>
       </section>
       <section style="flex:1; display:flex; align-items:center; justify-content:center;">
-        <img src="img/ImagenEjemplo.jpg" alt="Ejemplo contacto" style="width:80%; border-radius:16px; box-shadow:0 10px 20px rgba(163,216,244,0.18);" />
+        <img src="img/Contacto.webp" alt="Ejemplo contacto" style="width:80%; border-radius:16px; box-shadow:0 10px 20px rgba(163,216,244,0.18);" />
       </section>
     </main>
   </section>
 
-  <footer id="contacto">© 2025 Cooperativa ABC · Contacto: info@cooperativaabc.com · Tel: +598 1234 5678</footer>
+  <!-- ========== SECCIÓN CONTACTO - MOBILE ========== -->
+  <section id="seccionContactoMobile" class="mobile-only">
+    <div class="mobile-content-container" style="padding: 1rem;">
+      <div class="mobile-card">
+        <div style="background: linear-gradient(135deg, #ffc1e3 0%, #a3d8f4 100%); border-radius: 12px; padding: 1.5rem; box-shadow: 0 6px 15px rgba(163,216,244,0.2); margin-bottom:1.5rem;">
+          <h2 style="color:#de5f88; margin-bottom:0.8rem; font-size:1.5rem;">Contacto</h2>
+          <p style="color:#3c3c3c; font-size:0.95rem; line-height:1.6; margin-bottom:1rem;">¿Tienes dudas, sugerencias o quieres sumarte a la cooperativa? ¡Escríbenos!</p>
+          <ul style="list-style:none; padding:0; margin:0; color:#3c3c3c; font-size:0.95rem;">
+            <li style="margin-bottom:0.5rem;"><strong>Email:</strong> contacto@octocoop.com</li>
+            <li style="margin-bottom:0.5rem;"><strong>Teléfono:</strong> +598 1234 5678</li>
+            <li><strong>Dirección:</strong> Av. Ejemplo 1234, Montevideo</li>
+          </ul>
+        </div>
+        
+        <img src="img/Contacto.webp" alt="Contacto" style="width:100%; border-radius:12px; box-shadow:0 6px 15px rgba(163,216,244,0.2); margin-bottom:1.5rem;">
+        
+        <div style="background: linear-gradient(135deg, #a3d8f4 0%, #ffc1e3 100%); border-radius: 12px; padding: 1.5rem; box-shadow: 0 6px 15px rgba(222,95,136,0.2);">
+          <form style="display:flex; flex-direction:column; gap:0.8rem;">
+            <input type="text" placeholder="Tu nombre" required style="padding:12px; border-radius:8px; border:1px solid #e1eff9; font-size:1rem; width:100%;">
+            <input type="email" placeholder="Tu email" required style="padding:12px; border-radius:8px; border:1px solid #e1eff9; font-size:1rem; width:100%;">
+            <textarea placeholder="Tu mensaje" required style="padding:12px; border-radius:8px; border:1px solid #e1eff9; min-height:100px; font-size:1rem; width:100%; resize:vertical;"></textarea>
+            <button type="submit" style="background:#de5f88; color:#fff; border:none; padding:12px 18px; border-radius:999px; font-weight:700; cursor:pointer; font-size:1rem; width:100%;">Enviar mensaje</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer id="contacto">© 2025 Octoware · Contacto: Octoware@gmail.com · OctoCoop - Gestión Cooperativa Transparente</footer>
 
   <div class="modal-bg" id="modalBg" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
@@ -123,22 +240,20 @@
 
         <div class="field">
           <label for="email">Email *</label>
-          <input id="email" name="email" type="email" required placeholder="correo@ejemplo.com" />
+          <input id="email" name="email" type="email" required placeholder="correo@ejemplo.com" autocomplete="email" />
         </div>
 
 
         <div class="field">
           <label for="password">Contraseña *</label>
-          <input id="password" name="password" type="password" minlength="6" required placeholder="mínimo 6 caracteres" />
+          <input id="password" name="password" type="password" minlength="6" required placeholder="mínimo 6 caracteres" autocomplete="new-password" />
         </div>
         <div class="field">
           <label for="password2">Repetir Contraseña *</label>
-          <input id="password2" name="password2" type="password" minlength="6" required placeholder="Repite la contraseña" />
+          <input id="password2" name="password2" type="password" minlength="6" required placeholder="Repite la contraseña" autocomplete="new-password" />
         </div>
 
   <div class="field" id="passwordError" style="color:#d32f2f; font-size:0.98em; display:none;"></div>
-
-  <div class="field" id="successMsg" style="color:#388e3c; font-size:0.98em; display:none;"></div>
 
   <div class="actions">
           <div class="note">Los campos con * son obligatorios.</div>
@@ -148,9 +263,20 @@
     </div>
   </div>
 
-  <script src="script.js"></script>
-</body>
-</html>
+  <!-- Alert Moderno -->
+  <div class="alert-overlay" id="alertOverlay">
+    <div class="alert-modal">
+      <div class="alert-icon-large">
+        <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M9 12L11 14L15 10M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <h2 class="alert-modal-title">¡Registro Exitoso!</h2>
+      <p class="alert-modal-message">Serás avisado cuando sea aceptado y podrás ingresar a la aplicación con las credenciales que proporcionaste.</p>
+      <button class="alert-modal-btn" id="alertAcceptBtn">Aceptar</button>
+    </div>
+  </div>
+
   <script src="script.js"></script>
 </body>
 </html>
